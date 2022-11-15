@@ -122,19 +122,19 @@ info = {
 
 
 
-sqs = boto3.resource('sqs', region_name='us-east-1')
+sqs = boto3.resource('sqs', region_name='ap-south-1')
 queue = sqs.create_queue(QueueName='Storequeue', Attributes={'DelaySeconds': '10', 'VisibilityTimeout': '30'})
 queue2 = sqs.get_queue_by_name(QueueName='Storequeue')
 print(queue2.attributes)
 response = queue.send_message(MessageBody='Hey, Welcome to the store')
 print(response.get('MessageId'))
 print(response.get('MD5OfMessageBody'))
-region_name = 'ap-northeast-1'
+region_name = 'ap-south-1'
 queue_name = 'Storequeue'
 max_queue_messages = 10
 message_bodies = []
-aws_access_key_id = 'AKIARLWBLQECNRPS4ZN6'
-aws_secret_access_key = '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'
+aws_access_key_id = 'AKIA2PJN6IRF6EI4TEWL'
+aws_secret_access_key = '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'
 sqs = boto3.resource('sqs', region_name=region_name,
         aws_access_key_id=aws_access_key_id,
         aws_secret_access_key=aws_secret_access_key)
