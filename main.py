@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify, request
 from flasgger import Swagger, LazyString, LazyJSONEncoder
 from flasgger import swag_from
@@ -133,11 +135,17 @@ region_name = 'ap-south-1'
 queue_name = 'Storequeue'
 max_queue_messages = 10
 message_bodies = []
-aws_access_key_id = 'AKIA2PJN6IRF6EI4TEWL'
-aws_secret_access_key = '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'
-sqs = boto3.resource('sqs', region_name=region_name,
-        aws_access_key_id=aws_access_key_id,
-        aws_secret_access_key=aws_secret_access_key)
+# aws_access_key_id = ''
+# aws_secret_access_key = ''
+
+
+# client = boto3.client('sqs', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
+session = boto3.Session(region_name='ap-south-1',aws_access_key_id=os.environ.get('aws_access_key_id'), aws_secret_access_key=os.environ.get('aws_secret_access_key'))
+ec2 = session.client('sqs')
+# sqs = boto3.resource('sqs', region_name=region_name,
+#         aws_access_key_id=ACCESS_KEY,
+#         aws_secret_access_key=SECRET_KEY)
+
 queue = sqs.get_queue_by_name(QueueName=queue_name)
 
 app.run(port=5000)
