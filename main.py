@@ -60,7 +60,6 @@ swagger = Swagger(app, template=swagger_template,
                   config=swagger_config)
 @swag_from("store.yml", methods=['GET','POST'])
 
-
 @app.route('/')
 def home():
     return "Welcome to Store_Api"
@@ -137,15 +136,16 @@ max_queue_messages = 10
 message_bodies = []
 # aws_access_key_id = ''
 # aws_secret_access_key = ''
-
-
 # client = boto3.client('sqs', aws_access_key_id=ACCESS_KEY, aws_secret_access_key=SECRET_KEY)
-session = boto3.Session(region_name='ap-south-1',aws_access_key_id=os.environ.get('aws_access_key_id'), aws_secret_access_key=os.environ.get('aws_secret_access_key'))
+
+session = boto3.Session(region_name='ap-south-1', aws_access_key_id=os.environ.get('aws_access_key_id'), aws_secret_access_key=os.environ.get('aws_secret_access_key'))
 ec2 = session.client('sqs')
+
+
 # sqs = boto3.resource('sqs', region_name=region_name,
 #         aws_access_key_id=ACCESS_KEY,
 #         aws_secret_access_key=SECRET_KEY)
 
 queue = sqs.get_queue_by_name(QueueName=queue_name)
 
-app.run(port=5000)
+app.run(port=9090)
